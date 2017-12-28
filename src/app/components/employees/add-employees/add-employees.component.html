@@ -1,0 +1,87 @@
+<!--Add new employee-->
+<div class="container">
+  <h2>Add new employee</h2>
+  <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Name:</label>
+      <div class="col-xs-5">
+        <input type="text"
+               [(ngModel)]="employee.name"
+               #name="ngModel"
+               class="form-control"
+               id="name"
+               placeholder="Enter Name"
+               name="name"
+               [ngModelOptions]="{updateOn: 'change'}"
+               required>
+        <!--<div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>-->
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="password">Password:</label>
+      <div class="col-xs-5">
+        <input type="text"
+               [(ngModel)]="employee.password"
+               class="form-control "
+               id="password"
+               placeholder="Enter password"
+               name="password"
+               #password="ngModel"
+               [ngModelOptions]="{updateOn: 'change'}"
+               required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-xs-5">
+        <input type="email"
+               [(ngModel)]="employee.email"
+               class="form-control "
+               id="email"
+               placeholder="Enter email"
+               name="email"
+               #email="ngModel"
+               [ngModelOptions]="{updateOn: 'change'}"
+               required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="empType">Employee  Type:</label>
+      <div class="col-xs-5">
+        <input type="text"
+               [(ngModel)]="employee.empType"
+               class="form-control"
+               id="empType"
+               placeholder="Enter Employee Type"
+               name="empType"
+               #empType="ngModel"
+               [ngModelOptions]="{updateOn: 'change'}"
+               required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="bday">Birthday:</label>
+      <div class="col-xs-5">
+        <input type="date"
+               [(ngModel)]="employee.birthday"
+               class="form-control "
+               id="bday"
+               placeholder="Enter Birthday"
+               name="bday"
+               #bday="ngModel"
+               [ngModelOptions]="{updateOn: 'change'}"
+               required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

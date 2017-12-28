@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="card card-block">
+    <img class="img-block" src="avatar.png" />
+    <!-- Login Form-->
+
+    <div class="alert alert-danger" *ngIf="true">
+      <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Username or Password!
+    </div>
+
+    <form class="form-signin" (submit)="loginUser($event)">
+      <span id="reauth-email" class="reauth-email"></span>
+      <input type="email" id="inputEmail" class="form-control" ngModel placeholder="Email address" required autofocus>
+      <input type="password" id="inputPassword" class="form-control" ngModel placeholder="Password" required>
+
+      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+    </form><!-- End of login form -->
+  </div><!-- /card-block -->
+</div><!-- /container -->

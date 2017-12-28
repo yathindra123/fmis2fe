@@ -1,0 +1,5 @@
+input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
+.strike {
+  color: red;
+  text-decoration: line-through;
+}
