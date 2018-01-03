@@ -1,4 +1,4 @@
-<app-user-nav-bar></app-user-nav-bar>
+<app-admin-nav-bar></app-admin-nav-bar>
 <div class="container">
   <div class="row">
 
@@ -15,7 +15,9 @@
               <h3 class="panel-title">Maintenance Requests</h3>
             </div>
             <div class="col col-xs-6 text-right">
-              <button type="button" class="btn btn-sm btn-primary btn-create"><a routerLink="/mytickets/move" style="color: white"> Move Requests</a></button>
+              <button type="button" class="btn btn-sm btn-primary btn-create">
+                <a routerLink="/mytickets/move" style="color: white"> Move Requests</a>
+              </button>
             </div>
           </div>
         </div>
@@ -28,17 +30,16 @@
               <th>Cost</th>
               <th>Supplier</th>
               <th>Room</th>
-              <th>Date</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>1234567890123</td>
-              <td>New Item..</td>
-              <td>5400</td>
-              <td>Softlogic</td>
-              <td>101A</td>
-              <td>25/12/2017</td>
+            <tr *ngFor="let item of items">
+              <td>{{item.barcode}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.cost}}</td>
+              <td>{{item.supplier}}</td>
+              <td>{{item.room}}</td>
+              <button class="btn btn-danger btn-xs pull-right" (click)="deleteItem(item)">X</button>
             </tr>
 
             </tbody>

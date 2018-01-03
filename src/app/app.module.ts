@@ -30,6 +30,23 @@ import { RoomsAdderComponent } from './components/admin-panel/rooms-adder/rooms-
 import {EmployeeService} from './services/employee.service';
 import {FmisService} from './services/fmis.service';
 import { SearchComponent } from './components/searchEmployee/searchEmployee.component';
+import {MessageService} from './services/message.service';
+import {MaintenanceService} from './services/maintenance.service';
+import {MoveMessageService} from './services/move-message.service';
+import { CostComponent } from './components/userMessages/user-move/cost/cost.component';
+import {ItemService} from './services/item.service';
+import {RoomService} from './services/room.service';
+import {AuthService} from './services/auth.service';
+import {UserService} from './services/user.service';
+import {OnlyLoggedInUsersGuardService} from './services/only-logged-in-users-guard.service';
+import {AccordionModule, ButtonModule} from 'primeng/primeng';
+// import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import {FileUploadModule} from 'primeng/primeng';
+import {GrowlModule, Message} from 'primeng/primeng';
+import { FileViewComponent } from './components/file-view/file-view.component';
+import {FileUploadService} from './services/file-upload.service';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+
 
 @NgModule({
   declarations: [
@@ -55,29 +72,39 @@ import { SearchComponent } from './components/searchEmployee/searchEmployee.comp
     ItemsAdderComponent,
     RoomsAdderComponent,
     SearchComponent,
+    CostComponent,
+    // FileUploadComponent,
+    FileViewComponent,
+    FileUploadComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    AccordionModule,
     FormsModule,
     ReactiveFormsModule,
+    FileUploadModule,
+    GrowlModule,
+    ButtonModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
-      { path: 'user', component: UserPanelComponent },
+      { path: 'user', component: UserPanelComponent, canActivate: [AuthService, OnlyLoggedInUsersGuardService] },
       { path: 'admin', component: AdminPanelComponent },
-      { path: 'admin/maintenance', component: UserMaintenanceComponent },
+      { path: 'admin/maintenance', component: UserMaintenanceComponent},
       { path: 'admin/move', component: UserMoveComponent },
-      { path: 'mytickets/maintenance', component: MaintenanceComponent },
-      { path: 'mytickets/move', component: MoveComponent },
+      { path: 'mytickets/maintenance', component: MaintenanceComponent, canActivate: [AuthService, OnlyLoggedInUsersGuardService] },
+      { path: 'mytickets/move', component: MoveComponent, canActivate: [AuthService, OnlyLoggedInUsersGuardService] },
       { path: 'admin/employees', component: ViewEmployeesComponent },
       { path: 'admin/items', component: ViewItemsComponent },
       { path: 'admin/rooms', component: ViewRoomsComponent },
       { path: 'admin/employees/add', component: EmployeesAdderComponent },
       { path: 'admin/items/add', component: ItemsAdderComponent },
-      { path: 'admin/rooms/add', component: RoomsAdderComponent }
+      { path: 'admin/rooms/add', component: RoomsAdderComponent },
+      // { path: 'admin/rooms/add', component: RoomsAdderComponent, canActivate: [AuthService, OnlyLoggedInUsersGuardService] },
     ])
   ],
-  providers: [LoginService, EmployeeService, FmisService],
+  providers: [LoginService, EmployeeService, FmisService, MessageService, MaintenanceService,
+    MoveMessageService, ItemService, RoomService, AuthService, UserService, OnlyLoggedInUsersGuardService, FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,8 +7,8 @@
     <p>A simple example of how-to put a bordered table within a panel. Responsive, place holders in header/footer for buttons or pagination.</p>
     <br><br>
 
-    <app-search></app-search>
-
+    <div class="container"><app-search></app-search></div>
+    <div class="card-block">&nbsp;</div>
     <div class="col-md-10 col-md-offset-1">
 
       <div class="panel panel-default panel-table">
@@ -39,6 +39,7 @@
               <td>{{employee.email}}</td>
               <td>{{employee.empType}}</td>
               <td>{{employee.birthday}}</td>
+              <button class="btn btn-danger btn-xs pull-right" (click)="deleteEmployee(employee)">X</button>
             </tr>
 
             </tbody>

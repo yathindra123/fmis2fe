@@ -24,4 +24,11 @@ export class ViewEmployeesComponent implements OnInit {
     this.fmisService.getEmployees()
       .subscribe(employees => this.employees = employees);
   }
+
+  deleteEmployee (employee: Employee): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+      this.employees = this.employees.filter(h => h !== employee);
+      this.fmisService.deleteHero(employee).subscribe();
+    }
+  }
 }

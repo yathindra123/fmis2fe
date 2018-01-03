@@ -36,7 +36,7 @@
     <div class="col-sm-3 col-md-2">
       <ul class="nav nav-pills nav-stacked">
         <!-- Menus for navigation of messages -->
-        <li><a href="#"><span class="badge pull-right">{{messages.length}}</span> Maintenance requests </a></li>
+        <li><a href="#"><span class="badge pull-right">{{maintenance.length}}</span> Maintenance requests </a></li>
         <li><a href="#">Move Requests</a></li>
         <li><a href="#"><span class="badge pull-right">3</span>Trash</a></li>
         <!-- End of menus -->
@@ -44,18 +44,20 @@
     </div>
     <div class="col-sm-9 col-md-10">
 
-      <div class="msg odd" *ngFor="let message of messages">
+      <div class="msg odd" *ngFor="let message of maintenance">
         <div class="col-md-3 author">
           <label for="checkbo">
             <input type="checkbox" [(ngModel)]="message.deleted" id="checkbo">
           </label>
           <h5 class="media-heading">{{message.sender}} <small class="text-muted"> </small></h5><small class="text-muted">
-          <i class="fa fa-clock-o"></i>{{message.Date}}</small>
+          <i class="fa fa-clock-o"></i>{{message.createdAt}}</small>
         </div>
         <div [ngClass]="{strike: message.deleted}" class="col-md-9">
           {{message.message}}
         </div>
-        <button class="btn btn-danger btn-xs pull-right" (click)="deleteTodo(i)">X</button>
+        <!--<button class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#costModal" >edit</button>-->
+        <app-cost></app-cost>
+        <button class="btn btn-danger btn-xs pull-right" (click)="deleteMaintenance(message)">X</button>
         <div class="clearfix"></div><hr/>
       </div>
 

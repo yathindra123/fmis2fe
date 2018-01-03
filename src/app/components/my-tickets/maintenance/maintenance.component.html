@@ -15,7 +15,9 @@
               <h3 class="panel-title">Maintenance Requests</h3>
             </div>
             <div class="col col-xs-6 text-right">
-              <button type="button" class="btn btn-sm btn-primary btn-create"><a routerLink="/mytickets/move" style="color: white"> Move Requests</a></button>
+              <button type="button" class="btn btn-sm btn-primary btn-create">
+                <a routerLink="/mytickets/move" style="color: white"> Move Requests</a>
+              </button>
             </div>
           </div>
         </div>
@@ -31,15 +33,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>1</td>
-              <td>New Messssageeee</td>
-              <td>25/12/2017</td>
-              <td>5000</td>
-              <!--<td><span class="label label-warning">Pending</span></td>-->
-              <td><span class="{{getStatusClass()}}" >{{getStatus()}}</span></td>
+            <tr *ngFor="let message of maintenance">
+              <td>{{message.messageId}}</td>
+              <td>{{message.message}}</td>
+              <td>{{message.createdAt}}</td>
+              <td>{{message.price}}</td>
+              <td><span class="{{getStatusClass(message.status)}}" >{{getStatus(message.status)}}</span></td>
+              <button class="btn btn-primary btn-xs pull-right" (click)="editMaintenance(message)" >edit</button>
+              <button class="btn btn-danger btn-xs pull-right" (click)="deleteMaintenance(message)">X</button>
             </tr>
-
             </tbody>
           </table>
 

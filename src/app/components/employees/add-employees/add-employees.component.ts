@@ -11,7 +11,7 @@ import {NgForm} from '@angular/forms';
 })
 export class AddEmployeesComponent implements OnInit {
 
-  // employee: Employee;
+  // room: Employee;
   employee = new Employee();
   heroes: Employee[];
   employeeForm: FormGroup;

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MaintenanceMessage} from '../../../modals/maintenanceMessage/MaintenanceMessage';
+import {MessageService} from '../../../services/message.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-maintenance-req-sender',
@@ -7,9 +10,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaintenanceReqSenderComponent implements OnInit {
 
-  constructor() { }
+  maintenanceMessage = new MaintenanceMessage();
+  maintenanceMsgs: MaintenanceMessage[] = [];
+
+  constructor(private messageService: MessageService) { }
 
   ngOnInit() {
+    //   this.employeeForm = new FormGroup({
+    //     name: new FormControl('', {
+    //       validators: Validators.required,
+    //       updateOn: 'change'
+    //     }),
+    //     password: new FormControl('', {
+    //       validators: Validators.required,
+    //       updateOn: 'change'
+    //     }),
+    //     email: new FormControl('', {
+    //       validators: Validators.required,
+    //       updateOn: 'change'
+    //     }),
+    //     empType: new FormControl('', {
+    //       validators: Validators.required,
+    //       updateOn: 'change'
+    //     })
+    //   });
   }
+  addMove() {
+    // name = name.trim();
+    // if (!name) { return; }
+    this.messageService.addMove(this.maintenanceMessage)
+      .subscribe(move => {
+        this.maintenanceMsgs.push(move);
+      });
+  }
+
+  onSubmit(form: NgForm) {
+    this.messageService.addMaintenance(this.maintenanceMessage)
+      .subscribe(move => {
+        this.maintenanceMsgs.push(move);
+      });
+    console.log(form.value);
+  }
+
 
 }

@@ -1,39 +1,79 @@
 <!--Add new Item-->
 <div class="container">
   <h2>Add new items</h2>
-  <form class="form-horizontal">
+  <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
     <div class="form-group">
+      <div class="alert alert-danger"
+           *ngIf="barcode.touched && (barcode.invalid || barcode.pristine ) ||
+           cost.touched && (cost.invalid || cost.pristine ) ||
+           room.touched && (room.invalid || room.pristine )">
+        <a data-dismiss="alert" href="#"></a>Please fill all required fields!
+      </div>
       <label class="control-label col-sm-2" for="barcode">Barcode:</label>
       <div class="col-xs-5">
-        <input type="text" class="form-control " id="barcode" placeholder="Enter barcode" name="barcode">
+        <input type="text"
+               class="form-control "
+               id="barcode"
+               placeholder="Enter barcode"
+               name="barcode"
+               [(ngModel)]="item.barcode"
+               #barcode="ngModel">
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for="description">Description:</label>
       <div class="col-xs-5">
-        <input type="text" class="form-control " id="description" placeholder="Enter description" name="description">
+        <input type="text"
+               class="form-control"
+               id="description"
+               placeholder="Enter description"
+               name="description"
+               [ngModelOptions]="{updateOn: 'change'}"
+               [(ngModel)]="item.description"
+               #description="ngModel">
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for="cost">Cost:</label>
       <div class="col-xs-5">
-        <input type="text" class="form-control " id="cost" placeholder="Enter cost" name="cost">
+        <input type="text"
+               class="form-control"
+               id="cost"
+               placeholder="Enter cost"
+               name="cost"
+               [ngModelOptions]="{updateOn: 'change'}"
+               [(ngModel)]="item.cost"
+               #cost="ngModel">
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for="supplier">Supplier:</label>
       <div class="col-xs-5">
-        <input type="text" class="form-control " id="supplier" placeholder="Enter supplier" name="supplier">
+        <input type="text"
+               class="form-control"
+               id="supplier"
+               placeholder="Enter supplier"
+               name="supplier"
+               [ngModelOptions]="{updateOn: 'change'}"
+               [(ngModel)]="item.supplier"
+               #supplier="ngModel">
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-sm-2" for="room">Room:</label>
       <div class="col-xs-5">
-        <input type="text" class="form-control " id="room" placeholder="Enter room" name="room">
+        <input type="text"
+               class="form-control "
+               id="room"
+               placeholder="Enter room"
+               name="room"
+               [ngModelOptions]="{updateOn: 'change'}"
+               [(ngModel)]="item.room"
+               #room="ngModel">
       </div>
     </div>
 

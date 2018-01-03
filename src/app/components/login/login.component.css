@@ -1,6 +1,6 @@
 body, html {
   height: 100%;
-  background-image: url("avatar.png");
+  background-image: url("../../../resources/avatar.png");
   background-repeat: no-repeat;
   /*background: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33)) no-repeat;*/
 }

@@ -3,3 +3,6 @@ input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(
   color: red;
   text-decoration: line-through;
 }
+.btn-primary {
+  margin-left: 10px;
+}

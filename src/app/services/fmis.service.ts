@@ -14,13 +14,13 @@ const httpOptions = {
 @Injectable()
 export class FmisService {
 
-  private heroesUrl = 'http://localhost:8080/employees';  // URL to web api
+  private heroesUrl = 'http://localhost:8080/rooms';  // URL to web api
 
   constructor(
     private http: HttpClient,
     private employeeService: EmployeeService) { }
 
-  // Get all employees
+  // Get all rooms
   getEmployees (): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.heroesUrl)
       .pipe(
@@ -34,7 +34,7 @@ export class FmisService {
   //   const url = `${this.heroesUrl}/?id=${id}`;
   //   return this.http.get<Employee[]>(url)
   //     .pipe(
-  //       map(employees => employees[0]), // returns a {0|1} element array
+  //       map(rooms => rooms[0]), // returns a {0|1} element array
   //       tap(h => {
   //         const outcome = h ? `fetched` : `did not find`;
   //         this.log(`${outcome} hero id=${id}`);
@@ -52,15 +52,15 @@ export class FmisService {
     );
   }
 
-  /* GET heroes whose name contains searchEmployee term */
+  /* GET rooms whose name contains searchEmployee term */
   searchHeroes(term: string): Observable<Employee[]> {
     if (!term.trim()) {
       // if not searchEmployee term, return empty hero array.
       return of([]);
     }
     return this.http.get<Employee[]>(`http://localhost:8080/employees/${term}`).pipe(
-      tap(_ => console.log('Found')),
-      catchError(this.handleError<Employee[]>('searchHeroes', []))
+      tap(_ => this.log(`found heroes matching "${term}"`)),
+      catchError(this.handleError('searchHeroes', []))
     );
   }
 
@@ -78,7 +78,7 @@ export class FmisService {
   deleteHero (employee: Employee | number): Observable<Employee> {
     const id = typeof employee === 'number' ? employee : employee.empId;
     const url = `${this.heroesUrl}/${id}`;
-
+    console.log('Id: ' + id);
     return this.http.delete<Employee>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Employee>('deleteHero'))
@@ -103,7 +103,7 @@ export class FmisService {
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.employee}`);
+      this.log(`${operation} failed: ${error.item}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

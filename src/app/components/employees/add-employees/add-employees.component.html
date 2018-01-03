@@ -1,8 +1,14 @@
-<!--Add new employee-->
+<!--Add new room-->
 <div class="container">
   <h2>Add new employee</h2>
   <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
     <div class="form-group">
+      <div class="alert alert-danger"
+           *ngIf="email.touched && (email.invalid || email.pristine ) ||
+           password.touched && (password.invalid || password.pristine ) ||
+           name.touched && (name.invalid || name.pristine )">
+        <a data-dismiss="alert" href="#"></a>Please fill all required fields!
+      </div>
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-xs-5">
         <input type="text"
