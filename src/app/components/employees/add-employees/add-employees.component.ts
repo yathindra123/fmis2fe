@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FmisService} from '../../../services/fmis.service';
 import {Employee} from '../../../modals/employee/Employee';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {NgForm} from '@angular/forms';
+import {EmployeeService} from '../../../services/employee.service';
 
 @Component({
   selector: 'app-add-employees',
@@ -13,9 +13,9 @@ export class AddEmployeesComponent implements OnInit {
 
   // room: Employee;
   employee = new Employee();
-  heroes: Employee[];
+  employees: Employee[] = [];
   employeeForm: FormGroup;
-  constructor(private fmisService: FmisService) { }
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit() {
   //   this.employeeForm = new FormGroup({
@@ -37,19 +37,31 @@ export class AddEmployeesComponent implements OnInit {
   //     })
   //   });
   }
-  addEmployee() {
+  addEmployee(employee: Employee) {
     // name = name.trim();
     // if (!name) { return; }
-    this.fmisService.addHero(this.employee)
+    this.employeeService.addEmployee(this.employee)
       .subscribe(hero => {
-        this.heroes.push(hero);
+        this.employees.push(hero);
       });
   }
 
   onSubmit(form: NgForm) {
-    this.fmisService.addHero(this.employee)
+    this.employeeService.addEmployee(this.employee)
       .subscribe(hero => {
-        this.heroes.push(hero);
+        this.employees.push(hero);
       });
+  }
+
+  checkEmployeeDetails(employee: Employee) {
+      const regexp = new RegExp('^[1-9]\d{0,2}$');
+      const test = regexp.test(this.employee.email);
+      // window.alert('Invalid email'); // will display true
+    if (test) {
+      this.addEmployee(employee);
+    } else {
+      document.getElementsByClassName('regexAlert').item(0).innerHTML = 'Invalid email';
+      document.getElementsByClassName('regexAlert').item(0);
+    }
   }
 }

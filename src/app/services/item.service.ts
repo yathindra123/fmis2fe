@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Item} from '../modals/item/Item';
 
+// Http Options
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -14,11 +15,14 @@ const httpOptions = {
 export class ItemService {
 
   items: string[] = [];
-  private itemsUrl = 'http://localhost:8080/items';  // URL to web api
 
+  // URL to connect
+  private itemsUrl = 'http://localhost:8080/items';
+
+  // Create constructor
   constructor( private http: HttpClient ) { }
 
-  // Get all rooms
+  // Get all items
   getItems (): Observable<Item[]> {
     return this.http.get<Item[]>(this.itemsUrl)
       .pipe(
@@ -27,96 +31,61 @@ export class ItemService {
       );
   }
 
-  // /** GET hero by id. Return `undefined` when id not found */
-  // getHeroNo404<Employee>(id: number): Observable<Employee> {
-  //   const url = `${this.heroesUrl}/?id=${id}`;
-  //   return this.http.get<Employee[]>(url)
-  //     .pipe(
-  //       map(rooms => rooms[0]), // returns a {0|1} element array
-  //       tap(h => {
-  //         const outcome = h ? `fetched` : `did not find`;
-  //         this.log(`${outcome} hero id=${id}`);
-  //       }),
-  //       catchError(this.handleError<Employee>(`getHero id=${id}`))
-  //     );
-  // }
-
-  /** GET hero by id. Will 404 if id not found */
-  getItem(id: number): Observable<Item> {
-    const url = `${this.itemsUrl}/${id}`;
-    return this.http.get<Item>(url).pipe(
-      tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Item>(`getItem id=${id}`))
-    );
-  }
-
-  /* GET rooms whose name contains searchEmployee term */
-  searchItems(term: string): Observable<Item[]> {
-    if (!term.trim()) {
-      // if not searchEmployee term, return empty hero array.
-      return of([]);
-    }
-    return this.http.get<Item[]>(`http://localhost:8080/employees/${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError('searchItems', []))
-    );
-  }
-
-  ////// Save methods //////////
-
-  /** POST: add a new hero to the server */
+  // Add an item
   addItem (item: Item): Observable<Item> {
     return this.http.post<Item>(this.itemsUrl, item, httpOptions).pipe(
-      tap((item2: Item) => this.log(`added hero w/ id=${item2.barcode}`)),
+      tap((item2: Item) => this.log(`added item w/ id=${item2.barcode}`)),
       catchError(this.handleError<Item>('addItem'))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  // Delete an item
   deleteItem (item: Item | number): Observable<Item> {
     const barcode = typeof item === 'number' ? item : item.barcode;
     const url = `${this.itemsUrl}/${barcode}`;
 
     return this.http.delete<Item>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted hero barcode=${barcode}`)),
+      tap(_ => this.log(`deleted item barcode=${barcode}`)),
       catchError(this.handleError<Item>('deleteItem'))
     );
   }
 
-  /** PUT: update the hero on the server */
-  updateItem (item: Item): Observable<any> {
-    return this.http.put(this.itemsUrl, item, httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${item.barcode}`)),
+  // Update an item
+  updateItem (item: Item): Observable<Item> {
+    const barcode = typeof item === 'number' ? item : item.barcode;
+    const url = `${this.itemsUrl}/${barcode}`;
+    return this.http.put(url, item, httpOptions).pipe(
+      tap(_ => this.log(`updated item=${item}`)),
       catchError(this.handleError<any>('updateItem'))
     );
   }
 
-
-
-
+  // Handle the error
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      // Print the error object
+      console.error(error);
 
-      // TODO: better job of transforming error for user consumption
+      // Add to the log
       this.log(`${operation} failed: ${error.item}`);
 
-      // Let the app keep running by returning an empty result.
+      // return empty result to keep running
       return of(result as T);
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  // Log item to the item service
   private log(items: string) {
     this.add('ItemService: ' + items);
   }
 
+  // Add to the log
   add(item: string) {
     this.items.push(item);
   }
 
+  // Clear the log
   clear() {
     this.items = [];
   }

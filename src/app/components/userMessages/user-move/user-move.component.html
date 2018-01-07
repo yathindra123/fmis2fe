@@ -7,43 +7,18 @@
 <!-- End of topic -->
 
 <div class="container">
-  <!-- Basic buttons -->
-  <div class="row">
-    <div class="col-sm-3 col-md-2">
-      <a href="#" class="btn btn-danger btn-sm btn-block" role="button">COMPOSE</a>
-    </div>
-    <div class="col-sm-9 col-md-10">
-      <button appRedcolourwarn remBtnCol="red" type="button" class="btn btn-default" data-toggle="tooltip" title="Remove">
-        <span class="glyphicon glyphicon-trash"></span> Remove</button>
-      <button type="button" class="btn btn-default" data-toggle="tooltip" title="Done">
-        <span class="glyphicon glyphicon-ok"></span> Mark as Done</button>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-          More <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Mark as unread</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <!-- End of basic buttons -->
-
-  <!-- Horizontal ruler -->
   <hr />
-
   <div class="row">
     <div class="col-sm-3 col-md-2">
       <ul class="nav nav-pills nav-stacked">
         <!-- Menus for navigation of messages -->
-        <li><a href="#"><span class="badge pull-right">{{moves.length}}</span> Maintenance requests </a></li>
-        <li><a href="#">Move Requests</a></li>
-        <li><a href="#"><span class="badge pull-right">3</span>Trash</a></li>
-        <!-- End of menus -->
+        <li><a href="/admin/maintenance"></span> Maintenance requests </a></li>
+        <li><a href="/admin/move">Move Requests</a></li>
       </ul>
     </div>
     <div class="col-sm-9 col-md-10">
 
+      <!--List of move reuests-->
       <div class="msg odd" *ngFor="let message of moves">
         <div class="col-md-3 author">
           <label for="checkbo">
@@ -55,13 +30,13 @@
         <div [ngClass]="{strike: message.deleted}" class="col-md-9">
           {{message.message}}
         </div>
-        <button class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#costModal" >Edit</button>
+        <span>(Rs.{{message.price}})</span><br/>
+        <span>Room Id: {{message.roomId}}</span>
+        <button class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#costModal" (click)="editMove(message)">Edit</button>
         <app-cost></app-cost>
         <button class="btn btn-danger btn-xs pull-right" (click)="deleteMove(message)">X</button>
         <div class="clearfix"></div><hr/>
       </div>
-
-
     </div>
   </div>
 </div>

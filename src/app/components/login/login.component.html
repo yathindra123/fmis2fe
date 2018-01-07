@@ -1,12 +1,11 @@
 <div class="container">
   <div class="card card-block">
-    <img class="img-block" src="./resources/avatar.png" />
+    <img class="img-block" src="https://s26.postimg.org/ij8fnkhg9/avatar.png"/>
     <!-- Login Form-->
 
-    <div class="alert alert-danger" *ngIf="email.touched && (email.invalid || email.pristine )">
-      <a data-dismiss="alert" href="#"></a>Incorrect Username or Password!
+    <div class="alert alert-danger" *ngIf="(email.touched && (email.invalid || email.pristine && email.errors.pattern ) || password.touched && (password.invalid || password.pristine ))">
+      <a data-dismiss="alert" href="#"></a>Please fill out Username or Password!
     </div>
-
 
     <form class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
       <span id="reauth-email" class="reauth-email"></span>
@@ -34,5 +33,3 @@
     </form><!-- End of login form -->
   </div><!-- /card-block -->
 </div><!-- /container -->
-<app-file-upload></app-file-upload>
-

@@ -4,10 +4,10 @@
 
     <p></p>
     <h1>Employee List</h1>
-    <p>A simple example of how-to put a bordered table within a panel. Responsive, place holders in header/footer for buttons or pagination.</p>
+    <p>This will show All the employee details in the university/p>
     <br><br>
 
-    <div class="container"><app-search></app-search></div>
+    <div class="container"></div>
     <div class="card-block">&nbsp;</div>
     <div class="col-md-10 col-md-offset-1">
 
@@ -15,7 +15,7 @@
         <div class="panel-heading">
           <div class="row">
             <div class="col col-xs-6">
-              <h3 class="panel-title">Maintenance Requests</h3>
+              <h3 class="panel-title">Employee Manager</h3>
             </div>
           </div>
         </div>
@@ -39,16 +39,18 @@
               <td>{{employee.email}}</td>
               <td>{{employee.empType}}</td>
               <td>{{employee.birthday}}</td>
-              <button class="btn btn-danger btn-xs pull-right" (click)="deleteEmployee(employee)">X</button>
-            </tr>
 
+              <!-- Update employee details-->
+              <span class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#editEmployee" (click)="editEmployee(employee)"></span>&nbsp;
+              <app-edit-employee></app-edit-employee>
+
+              <!-- Delete employee-->
+              <span class="glyphicon glyphicon-trash" (click)="deleteEmployee(employee)"></span>&nbsp;
+            </tr>
             </tbody>
           </table>
-
         </div>
-
       </div>
-
     </div>
   </div>
 </div>

@@ -5,15 +5,20 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import {Room} from '../modals/room/room';
 
+// Http Options
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 @Injectable()
 export class RoomService {
 
   rooms: string[] = [];
+
+  // URL to connect
   private roomsUrl = 'http://localhost:8080/buildings';  // URL to web api
 
+  // Create constructor
   constructor( private http: HttpClient ) { }
 
   // Get all rooms
@@ -24,94 +29,63 @@ export class RoomService {
         catchError(this.handleError('getRooms', []))
       );
   }
-  //
-  // // /** GET hero by id. Return `undefined` when id not found */
-  // // getHeroNo404<Employee>(id: number): Observable<Employee> {
-  // //   const url = `${this.heroesUrl}/?id=${id}`;
-  // //   return this.http.get<Employee[]>(url)
-  // //     .pipe(
-  // //       map(rooms => rooms[0]), // returns a {0|1} element array
-  // //       tap(h => {
-  // //         const outcome = h ? `fetched` : `did not find`;
-  // //         this.log(`${outcome} hero id=${id}`);
-  // //       }),
-  // //       catchError(this.handleError<Employee>(`getHero id=${id}`))
-  // //     );
-  // // }
-  //
-  // /** GET hero by id. Will 404 if id not found */
-  // getRoom(id: number): Observable<Room> {
-  //   const url = `${this.roomsUrl}/${id}`;
-  //   return this.http.get<Room>(url).pipe(
-  //     tap(_ => this.log(`fetched room id=${id}`)),
-  //     catchError(this.handleError<Room>(`getRoom id=${id}`))
-  //   );
-  // }
-  //
-  // /* GET rooms whose name contains searchEmployee term */
-  // searchRooms(term: string): Observable<Room[]> {
-  //   if (!term.trim()) {
-  //     // if not searchEmployee term, return empty hero array.
-  //     return of([]);
-  //   }
-  //   return this.http.get<Room[]>(`http://localhost:8080/employees/${term}`).pipe(
-  //     tap(_ => this.log(`found users matching "${term}"`)),
-  //     catchError(this.handleError('searchRooms', []))
-  //   );
-  // }
 
-  ////// Save methods //////////
-
-  /** POST: add a new hero to the server */
+  // Add a room
   addRoom (room: Room): Observable<Room> {
     return this.http.post<Room>(this.roomsUrl, room, httpOptions).pipe(
-      tap((room2: Room) => this.log(`added hero w/ id=${room2.roomId}`)),
+      tap((room2: Room) => this.log(`added room w/ id=${room2.roomId}`)),
       catchError(this.handleError<Room>('addRoom'))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  // Delete a room
   deleteRoom (room: Room | number): Observable<Room> {
     const roomId = typeof room === 'number' ? room : room.roomId;
     const url = `${this.roomsUrl}/${roomId}`;
 
     return this.http.delete<Room>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted hero roomId=${roomId}`)),
+      tap(_ => this.log(`deleted room roomId=${roomId}`)),
       catchError(this.handleError<Room>('deleteRoom'))
     );
   }
 
-  // /** PUT: update the hero on the server */
-  // updateRoom (room: Room): Observable<any> {
-  //   return this.http.put(this.roomsUrl, room, httpOptions).pipe(
-  //     tap(_ => this.log(`updated room id=${room.roomId}`)),
-  //     catchError(this.handleError<any>('updateRooom'))
-  //   );
-  // }
+  // Update room details
+  updateRoom (room: Room): Observable<Room> {
+    const roomId = typeof room === 'number' ? room : room.roomId;
+    console.log(room);
+    const url = `${this.roomsUrl}/${roomId}`;
+    return this.http.put(url, room, httpOptions).pipe(
+      tap(_ => this.log(`updated room=${room}`)),
+      catchError(this.handleError<any>('updateRoom'))
+    );
+  }
 
+  // Handle the error
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      // Print the error object
+      console.error(error);
 
-      // TODO: better job of transforming error for user consumption
+      // Add to the log
       this.log(`${operation} failed: ${error.room}`);
 
-      // Let the app keep running by returning an empty result.
+      // return empty result to keep running
       return of(result as T);
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  // Log employee to the employee service
   private log(rooms: string) {
     this.add('RoomService: ' + rooms);
   }
 
+  // Add to the rooms
   add(room: string) {
     this.rooms.push(room);
   }
 
+  // Clear rooms
   clear() {
     this.rooms = [];
   }

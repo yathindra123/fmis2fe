@@ -1,7 +1,9 @@
-<!--Add new room-->
+<!--Add new employee-->
 <div class="container">
   <h2>Add new employee</h2>
-  <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+
+  <!-- Form-->
+  <form class="form-horizontal" #form="ngForm" (ngSubmit)="addEmployee(employee)" novalidate>
     <div class="form-group">
       <div class="alert alert-danger"
            *ngIf="email.touched && (email.invalid || email.pristine ) ||
@@ -20,7 +22,6 @@
                name="name"
                [ngModelOptions]="{updateOn: 'change'}"
                required>
-        <!--<div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>-->
       </div>
     </div>
 

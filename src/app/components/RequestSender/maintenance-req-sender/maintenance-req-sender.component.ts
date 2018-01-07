@@ -35,10 +35,10 @@ export class MaintenanceReqSenderComponent implements OnInit {
     //     })
     //   });
   }
-  addMove() {
+  addMaintenance() {
     // name = name.trim();
     // if (!name) { return; }
-    this.messageService.addMove(this.maintenanceMessage)
+    this.messageService.addMaintenance(this.maintenanceMessage)
       .subscribe(move => {
         this.maintenanceMsgs.push(move);
       });

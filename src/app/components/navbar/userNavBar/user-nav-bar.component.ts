@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TransferService} from '../../../services/transfer.service';
 
 @Component({
   selector: 'app-user-nav-bar',
@@ -7,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserNavBarComponent implements OnInit {
 
-  UserName= 'Yathindra';
-  constructor() { }
+  constructor(private transferService: TransferService ) { }
+
+  UserName= TransferService.employeeName;
 
   ngOnInit() {
   }

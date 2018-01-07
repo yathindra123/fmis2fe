@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Room} from '../../../modals/room/room';
 import {RoomService} from '../../../services/room.service';
+import {TransferService} from "../../../services/transfer.service";
 
 @Component({
   selector: 'app-view-rooms',
@@ -15,7 +16,7 @@ export class ViewRoomsComponent implements OnInit {
     this.getRooms();
   }
 
-  constructor(private roomService: RoomService) { }
+  constructor(private roomService: RoomService, private tranferService: TransferService) { }
 
   getRooms(): void {
     this.roomService.getRooms()
@@ -27,6 +28,9 @@ export class ViewRoomsComponent implements OnInit {
       this.rooms = this.rooms.filter(h => h !== room);
       this.roomService.deleteRoom(room).subscribe();
     }
+  }
+  editRoom(room: Room) {
+    this.tranferService.setRoom(room);
   }
 }
 

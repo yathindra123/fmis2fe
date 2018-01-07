@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService} from '../../../services/message.service';
 import {MaintenanceMessage} from '../../../modals/maintenanceMessage/MaintenanceMessage';
+import {TransferService} from '../../../services/transfer.service';
 @Component({
   selector: 'app-maintenance',
   templateUrl: './maintenance.component.html',
@@ -10,25 +11,23 @@ export class MaintenanceComponent implements OnInit {
   status: string;
   maintenance: MaintenanceMessage[] = [];
 
-  // maintenance = new MoveMessage();
-
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService , private transferService: TransferService) {
   }
 
   ngOnInit() {
     this.getMaintenance();
   }
 
-  getStatus(status: number) {
-    if (status === 0) {
+  getStatus(status: boolean) {
+    if (status === false) {
       return 'Pending';
     } else {
-      return 'Success';
+      return 'Approved';
     }
   }
 
-  getStatusClass(status: number) {
-    if (status === 0) {
+  getStatusClass(status: boolean) {
+    if (status === false) {
       return 'label label-warning';
     } else {
       return 'label label-success';
@@ -36,22 +35,36 @@ export class MaintenanceComponent implements OnInit {
   }
 
   getMaintenance(): void {
-    this.messageService.getMaintenance()
+    this.messageService.getMaintenance(this.transferService.getEmployeeName())
       .subscribe(maintenance => this.maintenance = maintenance);
   }
 
   deleteMaintenance(message: MaintenanceMessage): void {
-    const differece: any = new Date(message.createdAt).valueOf() - new Date().valueOf();
-    console.log(differece);
-    const diffInHours: any = (differece / ( 1000 * 3600 ));
+    const difference: any = new Date(message.createdAt).valueOf() - new Date().valueOf();
+    console.log(difference);
+    const diffInHours: any = Math.abs(difference / ( 1000 * 3600 ));
     if (diffInHours <= 24) {
       console.log('Can delete');
       console.log(diffInHours);
+      if (window.confirm('Are you sure you want to delete?')) {
+        this.maintenance = this.maintenance.filter(h => h !== message);
+        this.messageService.deleteMaintenance(message).subscribe();
+      }
+    } else {
+      window.alert('Sorry. You can\'t delete');
     }
-
-    if (window.confirm('Are you sure you want to delete?')) {
-      this.maintenance = this.maintenance.filter(h => h !== message);
-      this.messageService.deleteMaintenance(message).subscribe();
+  }
+  editMaintenance(message: MaintenanceMessage) {
+    const difference: any = new Date(message.createdAt).valueOf() - new Date().valueOf();
+    console.log(difference);
+    const diffInHours: any = Math.abs(difference / ( 1000 * 3600 ));
+    if (diffInHours <= 24) {
+      if (window.confirm('Are you sure you want to delete?')) {
+        this.transferService.setMove(message);
+      }
+    } else {
+      window.alert('Sorry. You can\'t edit');
     }
   }
 }
+

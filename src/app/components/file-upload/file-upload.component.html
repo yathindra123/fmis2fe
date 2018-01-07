@@ -1,9 +1,34 @@
 <div class="file-upload">
-  <input type="file" name="file" id="fileUpload" (change)="pushFiles($event)" multiple/>
-  <label for="fileUpload">Add File</label>
-</div>
+  <input type="file" onchange="previewFile()"><br>
+  <img src="" id ="img" height="200" alt="Image">
 
-<!--<files-view [files]="files"-->
-            <!--[removeFile]="removeFile"-->
-            <!--[downloadFile]="downloadFile">-->
-<!--</files-view>-->
+  <script>
+//    function readURL(input) {
+//      if (input.files && input.files[0]) {
+//        var reader = new FileReader();
+//
+//        document.getElementById('blah').src='reZz'
+//
+//        reader.readAsDataURL(input.files[0]);
+//      }
+//    }
+function previewFile() {
+  var preview = document.getElementById('img');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
+
+  reader.addEventListener("load", function () {
+    preview.src = reader.result;
+  });
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+
+  reader.onloadend = function() {
+    console.log(reader.error.message);
+  };
+}
+
+  </script>
+</div>

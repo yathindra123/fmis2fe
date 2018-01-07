@@ -13,20 +13,16 @@ const httpOptions = {
 export class LoginService {
 
   users: String[] = [];
-  private loginUrl = 'http://localhost:8080/login';  // URL to web api
 
+  // URL to connect
+  private loginUrl = 'http://localhost:8080/login';
+
+  // Create constructor
   constructor(
     private http: HttpClient) { }
 
-  // getUser(): Observable<User> {
-  //   const url = `${this.loginUrl}`;
-  //   return this.http.get<User>(url).pipe(
-  //     tap(_ => this.log(`fetched hero id`)),
-  //     catchError(this.handleError<User>(`getUser id`))
-  //   );
-  // }
-
-  getUser (email: string, password: string): Observable<User[]> {
+  // Get user document from the database
+    getUser (email: string, password: string): Observable<User[]> {
     return this.http.get<User[]>(this.loginUrl, {
       params: {
         email: email,
@@ -38,41 +34,33 @@ export class LoginService {
         catchError(this.handleError('getEmployees', []))
       );
   }
-  // private isUserLoggedIn;
-  // private username;
-  // constructor() {
-  //   this.isUserLoggedIn = false;
-  // }
-  //
-  // setUserLoggedIn() {
-  //   this.isUserLoggedIn = true;
-  // }
-  // getUserLoggedIn() {
-  //   return this.isUserLoggedIn;
-  // }
 
+  // Handle the error
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      // Print the error object
+      console.error(error);
 
-      // TODO: better job of transforming error for user consumption
+      // Add to the log
       this.log(`${operation} failed: ${error.user}`);
 
-      // Let the app keep running by returning an empty result.
+      // return empty result to keep running
       return of(result as T);
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  // Log item to the employee service
   private log(user: string) {
     this.add('EmployeeService: ' + user);
   }
+
+  // Add to the log
   add(user: string) {
     this.users.push(user);
   }
 
+  // Clear the log
   clear() {
     this.users = [];
   }

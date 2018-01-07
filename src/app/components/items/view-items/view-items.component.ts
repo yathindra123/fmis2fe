@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Item} from '../../../modals/item/Item';
 import {ItemService} from '../../../services/item.service';
+import {TransferService} from "../../../services/transfer.service";
 
 @Component({
   selector: 'app-view-items',
@@ -10,7 +11,7 @@ import {ItemService} from '../../../services/item.service';
 export class ViewItemsComponent implements OnInit {
   items: Item[] = [];
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, private tranferService: TransferService) { }
 
   ngOnInit() {
     this.getItems();
@@ -26,5 +27,8 @@ export class ViewItemsComponent implements OnInit {
       this.items = this.items.filter(h => h !== item);
       this.itemService.deleteItem(item).subscribe();
     }
+  }
+  editItem(item: Item) {
+    this.tranferService.setItem(item);
   }
 }

@@ -1,5 +1,6 @@
 <app-user-nav-bar></app-user-nav-bar>
 
+<!-- User Panel-->
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -17,25 +18,17 @@
     </div>
 
     <div class="col-md-3">
-        <img src="/src/assets/add.png" data-toggle="modal" data-target="#maintenanceModal" class="rounded float-left" width="150px" height="150px"><label>New Maintenance Request</label>
+        <img src="https://s26.postimg.org/3oju9oaix/add.png" data-toggle="modal" data-target="#maintenanceModal" class="rounded float-left" width="150px" height="150px"><label>New Maintenance Request</label>
         <app-maintenance-req-sender></app-maintenance-req-sender>
-      <!--</a>-->
     </div>
     <div class="col-md-3">
-      <!--<a href="#">-->
-        <img src="/src/assets/add.png" data-toggle="modal" data-target="#moveModal" class="rounded float-left" width="150px" height="150px"><label>New Move Request</label>
+        <img src="https://s26.postimg.org/3oju9oaix/add.png" data-toggle="modal" data-target="#moveModal" class="rounded float-left" width="150px" height="150px"><label>New Move Request</label>
         <app-move-req-sender></app-move-req-sender>
-      <!--</a>-->
     </div>
     <div class="col-md-3">
       <a routerLink="/mytickets/maintenance">
-        <img src="/src/assets/message.png" class="rounded float-left" width="150px" height="150px"><label>View My Tickets List</label>
+        <img src="https://s26.postimg.org/cjkok64g9/message.png" class="rounded float-left" width="150px" height="150px"><label>View My Tickets List</label>
       </a>
     </div>
   </div>
-
-  <!--<app-file-upload></app-file-upload>-->
-
-  <img [src]="url" height="200"> <br/>
-  <input type='file' (change)="onSelectFile($event)">
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MaintenanceMessage} from '../../../modals/maintenanceMessage/MaintenanceMessage';
 import {MessageService} from '../../../services/message.service';
+import {TransferService} from '../../../services/transfer.service';
 
 @Component({
   selector: 'app-user-maintenance',
@@ -9,36 +10,25 @@ import {MessageService} from '../../../services/message.service';
 })
 export class UserMaintenanceComponent implements OnInit {
   maintenance: MaintenanceMessage[] = [];
-  // maintenance = new MoveMessage();
 
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService, private transferService: TransferService) { }
 
   ngOnInit() {
-    this.getMoves();
+    this.getMaintenance();
   }
 
-  getMoves(): void {
-    this.messageService.getMaintenance()
+  getMaintenance(): void {
+    this.messageService.getAllMaintenance()
       .subscribe(maintenance => this.maintenance = maintenance);
   }
-  // // add(name: string): void {
-  // //   name = name.trim();
-  // //   if (!name) { return; }
-  // //   this.messageService.addMove({ name } as MoveMessage)
-  // //     .subscribe(move => {
-  // //       this.maintenance.push(move);
-  // //     });
-  // // }
-  //
-  // delete(move: MoveMessage): void {
-  //   this.maintenance = this.maintenance.filter(h => h !== move);
-  //   this.messageService.deleteMove(move).subscribe();
-  // }
 
   deleteMaintenance(message: MaintenanceMessage): void {
     if (window.confirm('Are you sure you want to delete?')) {
       this.maintenance = this.maintenance.filter(h => h !== message);
       this.messageService.deleteMaintenance(message).subscribe();
     }
+  }
+  editMaintenance(message: MaintenanceMessage) {
+    this.transferService.setMaintenance(message);
   }
 }

@@ -1,6 +1,7 @@
+<!--Add cost for relocation requests-->
 <div class="modal fade" id="costModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <form class="form-horizontal" #form="ngForm" (ngSubmit)="update(form)" novalidate>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="update(moveMessage.price)" novalidate>
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Add Cost For Office Move Requests</h5>

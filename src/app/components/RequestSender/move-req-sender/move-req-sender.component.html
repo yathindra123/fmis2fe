@@ -1,3 +1,4 @@
+<!-- Move Request Sender-->
 <div class="modal fade" id="moveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <form class="form-horizontal" #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
@@ -9,6 +10,36 @@
           </button>
         </div>
         <div class="modal-body">
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="roomId">Room Id:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     [(ngModel)]="moveMessage.roomId"
+                     class="form-control"
+                     id="roomId"
+                     placeholder="Enter Room ID"
+                     name="roomId"
+                     #roomId="ngModel"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="roomId">Barcode:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     [(ngModel)]="moveMessage.barcode"
+                     class="form-control"
+                     id="barcode"
+                     placeholder="Enter Barcode"
+                     name="barcode"
+                     #barcode="ngModel"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+            </div>
+          </div>
 
           <div class="form-group">
             <label for="message-text" class="form-control-label">Message:</label>
