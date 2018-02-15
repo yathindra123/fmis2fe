@@ -9,37 +9,15 @@ import {EmployeeService} from '../../../services/employee.service';
   templateUrl: './add-employees.component.html',
   styleUrls: ['./add-employees.component.css']
 })
-export class AddEmployeesComponent implements OnInit {
+export class AddEmployeesComponent {
 
-  // room: Employee;
   employee = new Employee();
   employees: Employee[] = [];
   employeeForm: FormGroup;
   constructor(private employeeService: EmployeeService) { }
 
-  ngOnInit() {
-  //   this.employeeForm = new FormGroup({
-  //     name: new FormControl('', {
-  //       validators: Validators.required,
-  //       updateOn: 'change'
-  //     }),
-  //     password: new FormControl('', {
-  //       validators: Validators.required,
-  //       updateOn: 'change'
-  //     }),
-  //     email: new FormControl('', {
-  //       validators: Validators.required,
-  //       updateOn: 'change'
-  //     }),
-  //     empType: new FormControl('', {
-  //       validators: Validators.required,
-  //       updateOn: 'change'
-  //     })
-  //   });
-  }
+  // Add new employee
   addEmployee(employee: Employee) {
-    // name = name.trim();
-    // if (!name) { return; }
     this.employeeService.addEmployee(this.employee)
       .subscribe(hero => {
         this.employees.push(hero);
@@ -56,7 +34,6 @@ export class AddEmployeesComponent implements OnInit {
   checkEmployeeDetails(employee: Employee) {
       const regexp = new RegExp('^[1-9]\d{0,2}$');
       const test = regexp.test(this.employee.email);
-      // window.alert('Invalid email'); // will display true
     if (test) {
       this.addEmployee(employee);
     } else {

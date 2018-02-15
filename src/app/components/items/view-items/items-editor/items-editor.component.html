@@ -1,0 +1,99 @@
+<div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!--<form class="form-horizontal" #form="ngForm" (ngSubmit)="update(item)" novalidate>-->
+
+
+
+
+
+
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="update(item)" novalidate>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Cost For Office Move Requests</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+
+            <label class="control-label col-sm-2" for="barcode">Barcode:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     class="form-control "
+                     id="barcode"
+                     placeholder="Enter barcode"
+                     name="barcode"
+                     [(ngModel)]="item.barcode"
+                     #barcode="ngModel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="description">Description:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     class="form-control"
+                     id="description"
+                     placeholder="Enter description"
+                     name="description"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     [(ngModel)]="item.description"
+                     #description="ngModel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="cost">Cost:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     class="form-control"
+                     id="cost"
+                     placeholder="Enter cost"
+                     name="cost"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     [(ngModel)]="item.cost"
+                     #cost="ngModel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="supplier">Supplier:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     class="form-control"
+                     id="supplier"
+                     placeholder="Enter supplier"
+                     name="supplier"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     [(ngModel)]="item.supplier"
+                     #supplier="ngModel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="room">Room:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     class="form-control "
+                     id="room"
+                     placeholder="Enter room"
+                     name="room"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     [(ngModel)]="item.room"
+                     #room="ngModel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

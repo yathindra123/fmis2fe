@@ -1,0 +1,128 @@
+<div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="update(room)" novalidate>
+      <div class="form-group">
+        <!--<div class="alert alert-danger"-->
+             <!--*ngIf="roomId.touched && (roomId.invalid || roomId.pristine ) ||-->
+           <!--spaceCode.touched && (spaceCode.invalid || spaceCode.pristine ) ||-->
+           <!--ufa.touched && (ufa.invalid || ufa.pristine )">-->
+          <!--<a data-dismiss="alert" href="#"></a>Please fill all required fields!-->
+        <!--</div>-->
+        <label class="control-label col-sm-2" for="roomId">Room Id:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="roomId"
+                 placeholder="Enter room"
+                 name="roomId"
+                 [(ngModel)]="room.roomId"
+                 #roomId="ngModel">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="floorId">Floor Id:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="floorId"
+                 placeholder="Enter FloorId"
+                 name="floorId"
+                 [(ngModel)]="room.floorId"
+                 #floorId="ngModel"
+                 [ngModelOptions]="{updateOn: 'change'}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="spaceType">Space Type:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="spaceType"
+                 placeholder="Enter Space Type"
+                 name="spaceType"
+                 [(ngModel)]="room.spaceType"
+                 #spaceType="ngModel"
+                 [ngModelOptions]="{updateOn: 'change'}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="spaceCode">Space Code:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="spaceCode"
+                 placeholder="Enter Space Code"
+                 name="spaceCode"
+                 [(ngModel)]="room.spaceCode"
+                 #spaceCode="ngModel"
+                 [ngModelOptions]="{updateOn: 'change'}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="department">Department:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="department"
+                 placeholder="Enter department"
+                 name="department"
+                 [(ngModel)]="room.department"
+                 #department="ngModel"
+                 [ngModelOptions]="{updateOn: 'change'}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="gfa">Occupant:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="occupant"
+                 placeholder="Enter Occupant"
+                 name="occupant"
+                 [(ngModel)]="room.occupant"
+                 #occupant="ngModel"
+                 [ngModelOptions]="{updateOn: 'change'}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="gfa">GFA:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="gfa"
+                 placeholder="Enter gfa"
+                 name="gfa"
+                 [(ngModel)]="room.gfa"
+                 #gfa="ngModel"
+                 [ngModelOptions]="{updateOn: 'change'}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="ufa">UFA:</label>
+        <div class="col-xs-5">
+          <input type="text"
+                 class="form-control"
+                 id="ufa"
+                 placeholder="Enter ufa"
+                 name="ufa"
+                 [(ngModel)]="room.ufa"
+                 #ufa="ngModel"
+                 [ngModelOptions]="{updateOn: 'change'}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

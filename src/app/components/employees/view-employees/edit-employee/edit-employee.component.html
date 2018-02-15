@@ -1,0 +1,128 @@
+<div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="update(employee)" novalidate>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Cost For Office Move Requests</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <!--<div class="alert alert-danger"-->
+            <!--*ngIf="email.touched && (email.invalid || email.pristine ) ||-->
+            <!--password.touched && (password.invalid || password.pristine ) ||-->
+            <!--name.touched && (name.invalid || name.pristine )">-->
+            <!--<a data-dismiss="alert" href="#"></a>Please fill all required fields!-->
+            <!--</div>-->
+            <label class="control-label col-sm-2" for="empId">EmpId:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     [(ngModel)]="employee.empId"
+                     #name="ngModel"
+                     class="form-control"
+                     id="empId"
+                     placeholder="Enter Name"
+                     name="empId"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+              <!--<div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>-->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <!--<div class="alert alert-danger"-->
+            <!--*ngIf="email.touched && (email.invalid || email.pristine ) ||-->
+            <!--password.touched && (password.invalid || password.pristine ) ||-->
+            <!--name.touched && (name.invalid || name.pristine )">-->
+            <!--<a data-dismiss="alert" href="#"></a>Please fill all required fields!-->
+            <!--</div>-->
+            <label class="control-label col-sm-2" for="name">Name:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     [(ngModel)]="employee.name"
+                     #name="ngModel"
+                     class="form-control"
+                     id="name"
+                     placeholder="Enter Name"
+                     name="name"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+              <!--<div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>-->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="password">Password:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     [(ngModel)]="employee.password"
+                     class="form-control "
+                     id="password"
+                     placeholder="Enter password"
+                     name="password"
+                     #password="ngModel"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Email:</label>
+            <div class="col-xs-5">
+              <input type="email"
+                     [(ngModel)]="employee.email"
+                     class="form-control "
+                     id="email"
+                     placeholder="Enter email"
+                     name="email"
+                     #email="ngModel"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="empType">Employee  Type:</label>
+            <div class="col-xs-5">
+              <input type="text"
+                     [(ngModel)]="employee.empType"
+                     class="form-control"
+                     id="empType"
+                     placeholder="Enter Employee Type"
+                     name="empType"
+                     #empType="ngModel"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="bday">Birthday:</label>
+            <div class="col-xs-5">
+              <input type="date"
+                     [(ngModel)]="employee.birthday"
+                     class="form-control "
+                     id="bday"
+                     placeholder="Enter Birthday"
+                     name="bday"
+                     #bday="ngModel"
+                     [ngModelOptions]="{updateOn: 'change'}"
+                     required>
+            </div>
+          </div>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button><br><br>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
