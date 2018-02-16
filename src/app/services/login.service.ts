@@ -15,7 +15,7 @@ export class LoginService {
   users: String[] = [];
 
   // URL to connect
-  private loginUrl = 'http://localhost:8080/login';
+  private loginUrl = 'http://54.202.86.137:8080/login';
 
   // Create constructor
   constructor(

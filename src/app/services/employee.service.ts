@@ -16,7 +16,7 @@ export class EmployeeService {
   employees: string[] = [];
 
   // URL to connect
-  private employeesUrl = 'http://localhost:8080/employees';
+  private employeesUrl = 'http://54.202.86.137:8080/employees';
 
   // Create constructor
   constructor(

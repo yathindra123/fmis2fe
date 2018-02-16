@@ -16,7 +16,7 @@ export class RoomService {
   rooms: string[] = [];
 
   // URL to connect
-  private roomsUrl = 'http://localhost:8080/buildings';  // URL to web api
+  private roomsUrl = 'http://54.202.86.137:8080/buildings';  // URL to web api
 
   // Create constructor
   constructor( private http: HttpClient ) { }

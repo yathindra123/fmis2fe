@@ -17,9 +17,9 @@ const httpOptions = {
 export class MessageService {
 
   // Maintenance messages in the rest API
-  private maintenanceMessagesUrl = 'http://localhost:8080/messages/maintenance';
+  private maintenanceMessagesUrl = 'http://54.202.86.137:8080/messages/maintenance';
   // Move messages in the rest API
-  private moveMessagesUrl = 'http://localhost:8080/messages/move';
+  private moveMessagesUrl = 'http://54.202.86.137:8080/messages/move';
 
   // Create constructor
   constructor(

@@ -17,7 +17,7 @@ export class ItemService {
   items: string[] = [];
 
   // URL to connect
-  private itemsUrl = 'http://localhost:8080/items';
+  private itemsUrl = 'http://54.202.86.137:8080/items';
 
   // Create constructor
   constructor( private http: HttpClient ) { }
